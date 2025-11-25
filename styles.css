@@ -1,0 +1,110 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr 1fr auto;
+    gap: 5px;
+    height: 100vh;
+    border: 1px solid #000;
+    position: relative;
+}
+
+.block1 {
+    grid-column: 1 / 4;
+    background: #c9dcf2;
+    text-align: center;
+    padding: 10px;
+}
+.block2 {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    background: #d9ead3;
+    padding: 15px;
+}
+
+.block3 {
+    grid-column: 2;
+    grid-row: 2;
+    background: #fff;
+    padding: 10px;
+}
+
+.block4 {
+    grid-column: 3;
+    grid-row: 2;
+    background: #e2f0d9;
+    padding: 10px;
+}
+
+.block5 {
+    grid-column: 3;
+    grid-row: 3;
+    background: #fce5cd;
+    padding: 10px;
+}
+
+.block6 {
+    grid-column: 2 / 4;
+    grid-row: 4;
+    background: #c9dcf2;
+    padding: 10px;
+    text-align: left;
+}
+.blockX {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: white;
+    padding: 2px -5px;
+    border: 1px solid #000;
+}
+
+.blockY {
+    position: static;
+    display: inline-block;
+    margin-top: 10px;
+    background: white;
+    padding: 5px 15px;
+    border: 1px solid #000;
+    font-weight: bold;
+}
+
+
+nav ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap:15px;
+}
+
+nav a{
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+@media (max-width: 768px){
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}
+.property-field { border: 1px solid #ccc; padding: 10px; margin-bottom: 5px; background: #fff; display: flex; justify-content: space-between; align-items: center; }
+.property-field input { width: 40%; padding: 5px; }
+.remove-prop-btn { background: red; color: white; border: none; cursor: pointer; padding: 5px 10px; }
+
+/* --- Стилі для Collapse (Сторінка 2) --- */
+.collapse-item { margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+.collapse-btn { width: 100%; padding: 12px; text-align: left; background-color: #f1f1f1; border: none; outline: none; cursor: pointer; font-weight: bold; transition: background 0.3s; }
+.collapse-btn:hover { background-color: #e2e2e2; }
+.collapse-btn.active { background-color: #ccc; }
+.collapse-content { display: none; padding: 15px; background-color: white; border-top: 1px solid #ddd; }
