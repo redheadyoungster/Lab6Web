@@ -98,13 +98,80 @@ nav a{
         grid-template-rows: auto;
     }
 }
-.property-field { border: 1px solid #ccc; padding: 10px; margin-bottom: 5px; background: #fff; display: flex; justify-content: space-between; align-items: center; }
-.property-field input { width: 40%; padding: 5px; }
-.remove-prop-btn { background: red; color: white; border: none; cursor: pointer; padding: 5px 10px; }
+/* Стилі для форми генерації */
+.property-field {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+.property-field input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    flex: 1;
+}
+.remove-prop-btn {
+    cursor: pointer;
+    background: #ffcccc;
+    border: 1px solid #ff9999;
+    border-radius: 3px;
+}
 
-/* --- Стилі для Collapse (Сторінка 2) --- */
-.collapse-item { margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
-.collapse-btn { width: 100%; padding: 12px; text-align: left; background-color: #f1f1f1; border: none; outline: none; cursor: pointer; font-weight: bold; transition: background 0.3s; }
-.collapse-btn:hover { background-color: #e2e2e2; }
-.collapse-btn.active { background-color: #ccc; }
-.collapse-content { display: none; padding: 15px; background-color: white; border-top: 1px solid #ddd; }
+/* === Стилі для створеного об'єкта COLLAPSE === */
+#resultContainer {
+    margin-top: 20px;
+    border-top: 2px dashed #ccc;
+    padding-top: 10px;
+}
+
+.my-collapse-item {
+    margin-bottom: 5px;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.my-collapse-btn {
+    width: 100%;
+    background-color: #f8f9fa;
+    color: #212529;
+    padding: 10px 15px;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-collapse-btn:hover {
+    background-color: #e2e6ea;
+}
+
+.my-collapse-btn:after {
+    content: '\002B';
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.my-collapse-btn.active:after {
+    content: "\2212";
+}
+
+.my-collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: white;
+}
+
+.my-collapse-body {
+    padding: 15px;
+    border-top: 1px solid #dfdfdf;
+    color: #333;
+}

@@ -1,13 +1,19 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 header('Content-Type: application/json');
 
-// Отримуємо JSON
 $input = file_get_contents('php://input');
 $data = json_decode($input, true);
 
 if ($data !== null) {
-    // Зберігаємо у файл data.json
-    // Важливо: на хостингу файл data.json повинен мати права на запис (777 або 666)
     if (file_put_contents('data.json', json_encode($data, JSON_PRETTY_PRINT))) {
         echo json_encode(['success' => true, 'message' => 'Дані успішно збережено']);
     } else {

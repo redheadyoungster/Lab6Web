@@ -2,64 +2,62 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('collapseContainer');
     let currentDataHash = '';
 
-    // Функція малювання HTML (Пункт 2d)
     function renderCollapse(data) {
         container.innerHTML = '';
 
         if (!Array.isArray(data) || data.length === 0) {
-            container.innerHTML = '<p>Даних немає.</p>';
+            container.innerHTML = '<p style="padding:10px;">Даних поки немає.</p>';
             return;
         }
 
         data.forEach(item => {
-            // Створення структури
             const wrapper = document.createElement('div');
-            wrapper.className = 'collapse-item'; // Використовуємо класи з CSS
+            wrapper.className = 'my-collapse-item';
 
             const btn = document.createElement('button');
-            btn.className = 'collapse-btn';
+            btn.className = 'my-collapse-btn';
             btn.textContent = item.title;
 
-            const content = document.createElement('div');
-            content.className = 'collapse-content';
-            content.textContent = item.content;
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'my-collapse-content';
 
-            // Логіка кліку (Без jQuery/Bootstrap)
+            const bodyDiv = document.createElement('div');
+            bodyDiv.className = 'my-collapse-body';
+            bodyDiv.textContent = item.content;
+
+            contentDiv.appendChild(bodyDiv);
+            wrapper.appendChild(btn);
+            wrapper.appendChild(contentDiv);
+
             btn.addEventListener('click', function() {
-                // Перемикання видимості
-                if (content.style.display === 'block') {
-                    content.style.display = 'none';
-                    btn.classList.remove('active');
+                this.classList.toggle('active');
+                if (contentDiv.style.maxHeight) {
+                    contentDiv.style.maxHeight = null;
                 } else {
-                    content.style.display = 'block';
-                    btn.classList.add('active');
+                    contentDiv.style.maxHeight = contentDiv.scrollHeight + "px";
                 }
             });
 
-            wrapper.appendChild(btn);
-            wrapper.appendChild(content);
             container.appendChild(wrapper);
         });
     }
 
-    // Функція отримання даних (Пункт 2e)
     function fetchData() {
-        fetch('get_data.php')
+        fetch('get_data.php?t=' + new Date().getTime())
             .then(res => res.json())
             .then(data => {
                 const newDataHash = JSON.stringify(data);
-                // Перемальовуємо тільки якщо дані змінилися
+
                 if (newDataHash !== currentDataHash) {
-                    console.log('Дані оновлено, рендеринг...');
+                    console.log('🔄 Дані оновлено на сервері. Перемальовую...');
                     currentDataHash = newDataHash;
                     renderCollapse(data);
                 }
             })
-            .catch(err => console.error('Помилка завантаження:', err));
+            .catch(err => console.error('Помилка з\'єднання:', err));
     }
 
-    // Запуск
     fetchData();
-    // Періодичний контроль (polling) кожні 5 секунд
-    setInterval(fetchData, 5000);
+
+    setInterval(fetchData, 3000);
 });

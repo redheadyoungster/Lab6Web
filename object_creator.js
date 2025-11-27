@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const messageDiv = document.getElementById('message');
     const saveObjectBtn = document.getElementById('saveObjectBtn');
 
-    // Функція додавання рядка для Collapse
     function addCollapseItem(title = '', content = '') {
         const fieldDiv = document.createElement('div');
         fieldDiv.classList.add('property-field');
@@ -21,12 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
         propertiesContainer.appendChild(fieldDiv);
     }
 
-    // Додаємо один елемент за замовчуванням
     addCollapseItem('Приклад заголовка', 'Приклад тексту всередині');
 
     addPropertyBtn.addEventListener('click', () => addCollapseItem());
 
-    // Збереження (асинхронно)
     objectForm.addEventListener('submit', function(e) {
         e.preventDefault();
         saveObjectBtn.disabled = true;
